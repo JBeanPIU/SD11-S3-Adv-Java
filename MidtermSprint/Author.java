@@ -2,27 +2,30 @@
 // By: Cameron Beanland
 // Date: October 25th, 2024
 
-// most implementations should be added, but any extra commits may still happen lol
-
-import java.util.*; // adds all classes in the java.util package
+import java.util.*;
 
 public class Author {
     // properties
-    private String name;
+    private String firstName;
+    private String lastName;
     private Date dateOfBirth;
     private List<String> items; // a list of items
 
     // constructors
-    public Author(String name, Date dateOfBirth, List<String> items) {
-        this.name = name;
+    public Author(String firstName, String lastName, Date dateOfBirth, List<String> items) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.items = items;
     }
 
-
     /* -- GETTERS -- */
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public Date getDateOfBirth() {
@@ -33,10 +36,13 @@ public class Author {
         return items;
     }
 
-
     /* -- SETTERS -- */
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
@@ -47,7 +53,6 @@ public class Author {
         this.items = items;
     }
 
-
     /* -- METHODS -- */
     public void addItem(String item) {
         items.add(item);
@@ -57,7 +62,14 @@ public class Author {
         items.remove(item);
     }
 
+    public String authorName() { // added method for Library.java, just for better formatting
+        return firstName + " " + lastName;
+    }
+
+    @Override
     public String toString() {
-        return "Author Name: " + name + " Date: " + dateOfBirth + " Written works: " + items;
+        return "Author Name: " + firstName + " " + lastName +
+               "\nDate of Birth: " + dateOfBirth +
+               "\nWritten works: " + items;
     }
 }
