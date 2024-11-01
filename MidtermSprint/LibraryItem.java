@@ -3,18 +3,18 @@
 // Date: October 31st, 2024
 
 
-public class LibraryItem {
+public abstract class LibraryItem {
     // all basic props for library items
     private String id;
     private String title;
-    private String author;
+    private Author author;
     private String ISBN;
     private String publisher;
     private Integer copyNum; // weird naming but used to identify the number of available copies
 
 
     // constructors
-    public LibraryItem(String id, String title, String author, String ISBN, String publisher, Integer copyNum) {
+    public LibraryItem(String id, String title, Author author, String ISBN, String publisher, Integer copyNum) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -33,7 +33,7 @@ public class LibraryItem {
         return title;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
@@ -59,7 +59,7 @@ public class LibraryItem {
         this.title = title;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
@@ -102,5 +102,55 @@ public class LibraryItem {
 
     public boolean isAvailable() { // checks for availability
         return copyNum > 0;
+    }
+
+    public abstract String getFormat(); // implementation for Library.java
+
+    
+
+    @Override
+    public String toString() {
+        return libraryInfo();
+    }
+
+    /* -- STATIC CLASSES -- */
+    public static class Book extends LibraryItem {
+        private Format format;
+
+        public Book(String id, String title, Author author, String ISBN, String publisher, Integer copyNum, Integer isAvailable, Format format) {
+            super(id, title, author, ISBN, publisher, copyNum);
+            this.format = format; // assigns format properly
+        }
+
+        public enum Format {PRINTED, ELECTRONIC, AUDIO}
+
+        public void setFormat(Format format) { 
+            this.format = format;
+        }
+
+        @Override
+        public String getFormat() {
+            return "Book - " + format;
+        }
+    }
+
+    public static class Periodical extends LibraryItem {
+        private Format format;
+
+        public Periodical(String id, String title, Author author, String ISBN, String publisher, Integer copyNum, Integer isAvailable, Format format) {
+            super(id, title, author, ISBN, publisher, copyNum);
+            this.format = format; // same thing from line 120
+        }
+
+        public enum Format {PRINTED, ELECTRONIC}
+
+        public void setFormat(Format format) { 
+            this.format = format;
+        }
+
+        @Override
+        public String getFormat() {
+            return "Periodical - " + format;
+        }
     }
 }
