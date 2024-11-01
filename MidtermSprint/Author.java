@@ -1,23 +1,35 @@
-// Program: Author.java, a class containing methods for managing and containing author info, such as the name, date of birth, and items.
+// Program: Patron.java, a class representing customer (patron) information such as name, address, phone number, & list of items returned/borrowed.
 // By: Cameron Beanland
-// Date: October 25th, 2024
+// Date: October 31st, 2024
 
-import java.util.*;
+// A class requiring: first name, last name, address, phone number, and a list of library items they've borrowed. Implement whether they are student or employee.
 
-public class Author {
-    // properties
+import java.util.*; // adds all classes in the java.util package
+
+public class Patron {
+    // enum representing if patron is an employee or student
+    public enum PatronType {
+        STUDENT, EMPLOYEE
+    }
+
+    // properties for patron information
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
-    private List<String> items; // a list of items
+    private String streetAdd;
+    private Integer phoneNum;
+    private List<String> borrowedItems;
+    private PatronType type; 
 
-    // constructors
-    public Author(String firstName, String lastName, Date dateOfBirth, List<String> items) {
+    // constructors 
+    public Patron (String firstName, String lastName, String streetAdd, Integer phoneNum, List<String> borrowedItems, PatronType type) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.items = items;
+        this.streetAdd = streetAdd;
+        this.phoneNum = phoneNum;
+        this.borrowedItems = borrowedItems;
+        this.type = type;
     }
+
 
     /* -- GETTERS -- */
     public String getFirstName() {
@@ -28,13 +40,22 @@ public class Author {
         return lastName;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public String getStreetAdd() {
+        return streetAdd;
     }
 
-    public List<String> getItems() {
-        return items;
+    public Integer getPhoneNum() {
+        return phoneNum;
     }
+
+    public List<String> getBorrowedItems() {
+        return borrowedItems;
+    }
+
+    public PatronType getType() {
+        return type;
+    }
+
 
     /* -- SETTERS -- */
     public void setFirstName(String firstName) {
@@ -45,31 +66,45 @@ public class Author {
         this.lastName = lastName;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setStreetAdd(String streetAdd) {
+        this.streetAdd = streetAdd;
     }
 
-    public void setItems(List<String> items) {
-        this.items = items;
+    public void setPhoneNum(Integer phoneNum) {
+        this.phoneNum = phoneNum;
     }
+
+    public void setBorrowedItems(List<String> borrowedItems) {
+        this.borrowedItems = borrowedItems;
+    }
+
+    public void setType(PatronType type) {
+        this.type = type;
+    }
+
 
     /* -- METHODS -- */
-    public void addItem(String item) {
-        items.add(item);
+    public void borrowItem(String item) {
+        borrowedItems.add(item);    // function to borrow item
     }
 
-    public void removeItem(String item) {
-        items.remove(item);
+    public void returnItem(String item) {
+        borrowedItems.remove(item); // function to remove item
     }
 
-    public String authorName() { // added method for Library.java, just for better formatting
-        return firstName + " " + lastName;
+    public List<String> displayBorrowedItems() {
+        return borrowedItems;   // function displaying borrowed items
     }
 
-    @Override
-    public String toString() {
-        return "Author Name: " + firstName + " " + lastName +
-               "\nDate of Birth: " + dateOfBirth +
-               "\nWritten works: " + items;
+    public boolean checkBorrowedItem(String item) {
+        return borrowedItems.contains(item);    // function that checks if item is borrowed
     }
+
+    public String patronInfo() {
+        return "Name: " + firstName + " " + lastName + // function to view patron information
+        "\nAddress: " + streetAdd +
+        "\nPhone Number: " + phoneNum +
+        "\nPatron Type: " + type +
+        "\nBorrowed Items: " + borrowedItems;
+    }   
 }
