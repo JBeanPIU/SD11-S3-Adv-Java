@@ -2,6 +2,8 @@
 // By: Cameron Beanland
 // Date: October 31st, 2024
 
+// A class requiring: first name, last name, address, phone number, and a list of library items they've borrowed. Implement whether they are student or employee.
+
 import java.util.*; // adds all classes in the java.util package
 
 public class Patron {
@@ -98,7 +100,7 @@ public class Patron {
         return borrowedItems.contains(item);    // function that checks if item is borrowed
     }
 
-    public String viewInfo() {
+    public String patronInfo() {
         return "Name: " + firstName + " " + lastName + // function to view patron information
         "\nAddress: " + streetAdd +
         "\nPhone Number: " + phoneNum +
