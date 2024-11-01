@@ -1,6 +1,6 @@
 // Program: Libary.java, a class managing library items, authors, and patrons (alongside methods to search for library items)
 // By: Cameron Beanland
-// Date: October 25th, 2024
+// Date: October 31st, 2024
 
 import java.util.*;
 
